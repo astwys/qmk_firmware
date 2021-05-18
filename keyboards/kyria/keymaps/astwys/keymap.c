@@ -212,12 +212,23 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     }
     else if (index == 1) {
-        // Volume control
-        if (clockwise) {
-            tap_code(KC_VOLD);
+        if (keyboard_report->mods & MOD_BIT(KC_LSFT)) {
+            // Brightness control
+            if (clockwise) {
+                tap_code(KC_BRIGHTNESS_DOWN);
+            } else {
+                tap_code(KC_BRIGHTNESS_UP);
+            }
         } else {
-            tap_code(KC_VOLU);
+            // Volume control
+            if (clockwise) {
+                tap_code(KC_VOLD);
+            } else {
+                tap_code(KC_VOLU);
+            }
         }
+
+
     }
 }
 #endif
@@ -227,7 +238,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case T_MIC:
         if (record->event.pressed) {
             // when keycode T_MIC is pressed
-            SEND_STRING(SS_LCTL(SS_LSFT(SS_LALT(SS_LCMD("-")))));
+            SEND_STRING(SS_LCTL(SS_LSFT(SS_LCMD("-"))));
         } else {
             // when keycode T_MIC is released
         }
