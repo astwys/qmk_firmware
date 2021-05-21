@@ -17,6 +17,7 @@
 #pragma once
 
 #define TAPPING_TERM 120
+#define TAPPING_TERM_PER_KEY
 
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
