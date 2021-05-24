@@ -16,35 +16,39 @@
 #include QMK_KEYBOARD_H
 
 enum layers {
-    _QWERTY = 0,
+    _COLEMAKDH = 0,
     _LOWER,
     _RAISE,
-    _ADJUST
+    _ADJUST,
+    // _QWERTY,
 };
 
 enum custom_keycodes {
-    T_MIC, // toggle microphone
+    T_MIC,  // toggle microphone
+    // AE_UML, // tap dance for ä
+    // UE_UML, // tap dance for ü
+    // OE_UML, // tap dance for ö
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
- * Base Layer: QWERTY
+ * Base Layer: _COLEMAKDH
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |RAIS/ESC|   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
+ * |RAIS/ESC|   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  | ;  : |  | \   |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/BS |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+ * |Ctrl/BS |   A  |   R  |  S   |   T  |   G  |                              |   K  |   N  |   E  |   I  |   O  |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  |LShift|LShift|   N  |   M  | ,  < | . >  | /  ? |  - _   |
+ * | LShift |   Z  |   X  |   C  |   D  |   V  |LShift|LShift|  |LShift|LShift|   M  |   H  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | Del  | GUI  | Enter| Space| Esc  |  | Enter| Space| Tab  | Bksp | T_MIC|
  *                        |      |      | Alt  | Lower| Raise|  | Lower| Raise|      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_QWERTY] = LAYOUT(
-      LT(_RAISE, KC_ESC),       KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
-      MT(MOD_LCTL, KC_BSPC),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-      KC_LSFT,                 KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_LSFT, KC_LSFT, KC_LSFT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+    [_COLEMAKDH] = LAYOUT(
+      LT(_RAISE, KC_ESC),      KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                                         KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN,    KC_PIPE,
+      MT(MOD_LCTL, KC_BSPC),   KC_A,   KC_R,   KC_S,   KC_T,   KC_G,                                         KC_K,    KC_N,    KC_E,    KC_I,    KC_O, KC_QUOT,
+      KC_LSFT,                 KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,   KC_LSFT,   KC_LSFT, KC_LSFT, KC_LSFT, KC_M,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
               KC_DEL, KC_LGUI, MT(MOD_LALT, KC_ENT), LT(_LOWER, KC_SPC), LT(_RAISE, KC_ESC), LT(_LOWER, KC_ENT), LT(_RAISE, KC_SPC), KC_TAB,  KC_BSPC, T_MIC
     ),
 /*
@@ -127,6 +131,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
 //                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 //     ),
+// /*
+//  * Unused Layer: _QWERTY
+//  *
+//  * ,-------------------------------------------.                              ,-------------------------------------------.
+//  * |RAIS/ESC|   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  | \   |
+//  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+//  * |Ctrl/BS |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
+//  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+//  * | LShift |   Z  |   X  |   C  |   V  |   B  |LShift|LShift|  |LShift|LShift|   N  |   M  | ,  < | . >  | /  ? |  - _   |
+//  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+//  *                        | Del  | GUI  | Enter| Space| Esc  |  | Enter| Space| Tab  | Bksp | T_MIC|
+//  *                        |      |      | Alt  | Lower| Raise|  | Lower| Raise|      |      |      |
+//  *                        `----------------------------------'  `----------------------------------'
+//  */
+//     [_QWERTY] = LAYOUT(
+//       LT(_RAISE, KC_ESC),       KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
+//       MT(MOD_LCTL, KC_BSPC),   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+//       KC_LSFT,                 KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_LSFT,   KC_LSFT, KC_LSFT, KC_LSFT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+//               KC_DEL, KC_LGUI, MT(MOD_LALT, KC_ENT), LT(_LOWER, KC_SPC), LT(_RAISE, KC_ESC), LT(_LOWER, KC_ENT), LT(_RAISE, KC_SPC), KC_TAB,  KC_BSPC, T_MIC
+//     ),
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -169,7 +193,7 @@ static void render_status(void) {
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state)) {
-        case _QWERTY:
+        case _COLEMAKDH:
             oled_write_P(PSTR("Default\n"), false);
             break;
         case _LOWER:
@@ -251,8 +275,48 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case MT(MOD_LCTL, KC_BSPC):
         case LT(_RAISE, KC_SPC):
+        // case TD(AE_UML):
+        // case TD(UE_UML):
+        // case TD(OE_UML):
             return 200;
         default:
             return TAPPING_TERM;
     }
 }
+
+// void ae_umlaut(qk_tap_dance_state_t *state, void *user_data) {
+//     if (state->count == 2) {
+//         register_code(KC_LALT);
+//         tap_code(KC_U);
+//         unregister_code(KC_LALT);
+//     }
+//     tap_code(KC_A);
+//     reset_tap_dance(state);
+// }
+
+// void ue_umlaut(qk_tap_dance_state_t *state, void *user_data) {
+//     if (state->count == 2) {
+//         register_code(KC_LALT);
+//         tap_code(KC_U);
+//         unregister_code(KC_LALT);
+//     }
+//     tap_code(KC_U);
+//     reset_tap_dance(state);
+// }
+
+// void oe_umlaut(qk_tap_dance_state_t *state, void *user_data) {
+//    if (state->count == 2) {
+//         register_code(KC_LALT);
+//         tap_code(KC_U);
+//         unregister_code(KC_LALT);
+//     }
+//     tap_code(KC_O);
+//     reset_tap_dance(state);
+// }
+
+// // Tap Dance definitions
+// qk_tap_dance_action_t tap_dance_actions[] = {
+//     [AE_UML] = ACTION_TAP_DANCE_FN(ae_umlaut),
+//     [UE_UML] = ACTION_TAP_DANCE_FN(ue_umlaut),
+//     [OE_UML] = ACTION_TAP_DANCE_FN(oe_umlaut),
+// };
